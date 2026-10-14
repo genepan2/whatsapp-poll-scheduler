@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Café polls</title>
+<style>
+:root{font:16px system-ui,sans-serif;color:#172d26;background:#f3f5f0}*{box-sizing:border-box}body{margin:0}main{max-width:1000px;margin:auto;padding:36px 22px}header{margin-bottom:28px}h1{font-size:36px;letter-spacing:-1px;margin:4px 0}h2{font-size:19px;margin:0 0 18px}.sub{color:#52675e} .grid{display:grid;grid-template-columns:1.3fr 1fr;gap:22px}.card{background:white;border:1px solid #dde5dd;border-radius:18px;padding:24px;margin-bottom:20px}label{display:block;margin:20px 0 7px;font-weight:600}input:not([type=checkbox]),select,textarea{width:100%;padding:12px;border:1px solid #bbcbbf;border-radius:9px;font:inherit;color:inherit;background:white}textarea{resize:vertical;min-height:82px}button{font:inherit;border:0;background:#126849;color:white;padding:11px 17px;border-radius:9px;cursor:pointer}button.secondary{background:#eaf0e9;color:#214a37}button:disabled{opacity:.5;cursor:default}.row{display:flex;gap:8px;align-items:center;margin:8px 0}.row input{flex:1;min-width:0}.row button{padding:8px 10px}.hint{font-size:13px;color:#586b61;margin:7px 0}.check{font-weight:400;display:flex;gap:10px;align-items:center}.days{display:flex;flex-wrap:wrap;gap:12px}.days label{font-size:14px;font-weight:400;margin:8px 0}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}#notice{min-height:24px;margin-top:12px}#connection{font-weight:600}#qr{width:240px;max-width:100%;display:block;margin:15px auto}.poll{border-radius:12px;background:#e8f4ed;padding:20px}.poll h3{margin:0 0 18px;white-space:pre-wrap}.choice{border-top:1px solid #c7dfcf;padding:12px 0;overflow-wrap:anywhere}.choice:before{content:'○';margin-right:12px}#history{list-style:none;padding:0;font-size:14px}#history li{padding:12px 0;border-top:1px solid #e2e9e2;overflow-wrap:anywhere}.error{color:#a73123}#next{font-size:14px;line-height:1.5} @media(max-width:760px){.grid{grid-template-columns:1fr}main{padding:22px 14px}.card{padding:20px}}
+[hidden]{display:none!important}
+</style>
+<main>
+<header><p class="sub">Your Mac · Your WhatsApp</p><h1>Café polls</h1><p class="sub">Choose where to ship. Let the daily poll handle the asking.</p></header>
+<div class="grid"><section>
+<div class="card"><h2>Schedule & poll</h2>
+<form id="settings">
+<label for="group">WhatsApp group</label><select id="group"><option value="">Connect WhatsApp to choose a group</option></select>
+<p class="hint" id="groupHint"></p><button type="button" class="secondary" id="refresh">Refresh groups</button>
+<label for="question">Poll question</label><textarea id="question" maxlength="250" required></textarea><p class="hint">Use {date} for today's date, e.g. 01.10.</p>
+<label>Café options</label><div id="options"></div><button type="button" class="secondary" id="add">Add option</button>
+<label class="check"><input type="checkbox" id="multiple"> Allow multiple answers</label>
+<label for="time">Posting time</label><input type="time" id="time" required><p class="hint">Vietnam time · UTC+7</p>
+<label>Posting days</label><div class="days" id="days"></div>
+<label class="check"><input type="checkbox" id="enabled"> Enable scheduled posting</label>
+<div class="actions"><button type="submit">Save settings</button><button type="button" class="secondary" id="send">Send saved poll now…</button></div>
+<p class="hint">“Send now” posts an extra poll. It does not replace today's scheduled poll.</p>
+<p id="notice" role="status" aria-live="polite"></p>
+</form></div>
+</section><aside>
+<div class="card"><h2>WhatsApp connection</h2><p id="connection">Starting…</p><img id="qr" hidden alt="QR code to link your WhatsApp account"><p id="qrHint" class="hint" hidden>On your phone: WhatsApp → Settings → Linked devices → Link a device.</p><p id="connectionError" class="error"></p><p class="hint">The sender runs when this page is closed. Your Mac needs power and internet.</p></div>
+<div class="card"><h2>Preview</h2><div class="poll"><h3 id="previewQuestion"></h3><div id="previewOptions"></div></div><p id="previewHint" class="hint"></p><p id="next"></p><p class="hint">Preview uses today's Vietnam date. Each scheduled poll gets a fresh date and is pinned for 24 hours if group permissions allow.</p></div>
+<div class="card"><h2>Recent posting attempts</h2><ul id="history"></ul><p class="hint">“Uncertain” or “pending”: check the group yourself. The sender won't retry that attempt. Missed posting times are skipped.</p></div>
+</aside></div></main><script src="/app.js"></script>
+</html>

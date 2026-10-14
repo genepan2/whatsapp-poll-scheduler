@@ -1,0 +1,7 @@
+{
+  "name": "local-whatsapp-polls",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": { "start": "node server.js", "test": "node --test test.js", "test:browser": "node test-browser.js" },
+  "dependencies": { "whatsapp-web.js": "1.34.7", "qrcode": "1.5.4" }
+}
